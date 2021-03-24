@@ -112,12 +112,12 @@ namespace Deanery
 
         protected void Button1_Click1(object sender, EventArgs e)
         {
-            
-            //if (TextBox1.Text == null)
-            //{
-            //    throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound,
-            //    "Поле ввода пустое, пожалуйста, чтобы осуществить поиск, введите информацию!"));
-            //}
+
+            if (TextBox1.Text == "")
+            {
+                throw new NotImplementedException("Поле ввода пустое, пожалуйста, чтобы осуществить поиск, введите информацию!");
+                
+            }
         }
     }
         }

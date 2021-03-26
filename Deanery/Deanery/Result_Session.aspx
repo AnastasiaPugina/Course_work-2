@@ -78,7 +78,9 @@
                 </div>
 
         
-            <div style="height: 204px">
+            <div style="height: 251px; margin-top: 183px;">
+                <asp:Label ID="Label1" runat="server" Text="Введите код студента:"></asp:Label>
+&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox1" runat="server" Width="124px"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="Поиск" style="margin-left: 10px" Width="64px" />
                 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Id_stud,Id_sub" DataSourceID="SqlDataSource2" Height="100%" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" Width="70%">
@@ -90,13 +92,34 @@
                         <asp:BoundField DataField="Semester" HeaderText="Semester" SortExpression="Semester" />
                     </Columns>
                 </asp:GridView>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionString1 %>" SelectCommand="SELECT * FROM [Result_Session] WHERE (([Id_stud] = @Id_stud) OR ([Id_sub] = @Id_sub) OR ([Mark] = @Mark) OR ([Semester] = @Semester))">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionStringOO %>" SelectCommand="SELECT * FROM [Result_Session] WHERE ([Id_stud] = @Id_stud)" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Result_Session] WHERE [Id_stud] = @original_Id_stud AND [Id_sub] = @original_Id_sub AND [Date_exam] = @original_Date_exam AND [Mark] = @original_Mark AND [Semester] = @original_Semester" InsertCommand="INSERT INTO [Result_Session] ([Id_stud], [Id_sub], [Date_exam], [Mark], [Semester]) VALUES (@Id_stud, @Id_sub, @Date_exam, @Mark, @Semester)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Result_Session] SET [Date_exam] = @Date_exam, [Mark] = @Mark, [Semester] = @Semester WHERE [Id_stud] = @original_Id_stud AND [Id_sub] = @original_Id_sub AND [Date_exam] = @original_Date_exam AND [Mark] = @original_Mark AND [Semester] = @original_Semester">
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_Id_stud" Type="Int32" />
+                        <asp:Parameter Name="original_Id_sub" Type="Int32" />
+                        <asp:Parameter Name="original_Date_exam" Type="DateTime" />
+                        <asp:Parameter Name="original_Mark" Type="Int32" />
+                        <asp:Parameter Name="original_Semester" Type="Int32" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="Id_stud" Type="Int32" />
+                        <asp:Parameter Name="Id_sub" Type="Int32" />
+                        <asp:Parameter Name="Date_exam" Type="DateTime" />
+                        <asp:Parameter Name="Mark" Type="Int32" />
+                        <asp:Parameter Name="Semester" Type="Int32" />
+                    </InsertParameters>
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="TextBox1" Name="Id_stud" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="TextBox1" Name="Id_sub" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="TextBox1" Name="Mark" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="TextBox1" Name="Semester" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="TextBox1" Name="Id_stud" PropertyName="Text" Type="Int32" />
                     </SelectParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="Date_exam" Type="DateTime" />
+                        <asp:Parameter Name="Mark" Type="Int32" />
+                        <asp:Parameter Name="Semester" Type="Int32" />
+                        <asp:Parameter Name="original_Id_stud" Type="Int32" />
+                        <asp:Parameter Name="original_Id_sub" Type="Int32" />
+                        <asp:Parameter Name="original_Date_exam" Type="DateTime" />
+                        <asp:Parameter Name="original_Mark" Type="Int32" />
+                        <asp:Parameter Name="original_Semester" Type="Int32" />
+                    </UpdateParameters>
                 </asp:SqlDataSource>
             </div>
 

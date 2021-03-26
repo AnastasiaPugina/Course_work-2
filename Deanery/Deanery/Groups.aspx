@@ -26,7 +26,7 @@
             </asp:Menu>
         </div>
                     
-            <div style="height: 372px; margin-top: 1px">
+            <div style="height: 560px; margin-top: 1px">
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Title" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" CellPadding="5" Height="68%" HorizontalAlign="Left" Width="70%" style="margin-top: 4px">
                 <Columns>
                     <asp:BoundField DataField="Title" HeaderText="Title" ReadOnly="True" SortExpression="Title" />
@@ -75,8 +75,10 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
                </div>
-        <div style="height: 235px">
-            <div style="height: 227px">
+        <div style="height: 293px">
+            <div style="height: 227px; margin-top: 0px;">
+                <asp:Label ID="Label1" runat="server" Text="Введите название группы:"></asp:Label>
+&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox1" runat="server" Width="112px"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="Поиск" style="margin-left: 11px" Width="62px" />
                 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Title" DataSourceID="SqlDataSource2" Height="200px" Width="587px">
@@ -88,7 +90,7 @@
                         <asp:BoundField DataField="Elder" HeaderText="Elder" SortExpression="Elder" />
                     </Columns>
                 </asp:GridView>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionString2 %>" SelectCommand="SELECT * FROM [Groups] WHERE (([Course] = @Course) OR ([Curator] LIKE '%' + @Curator + '%') OR ([Title] LIKE '%' + @Title + '%'))" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Groups] WHERE [Title] = @original_Title AND [Course] = @original_Course AND [Specialty] = @original_Specialty AND [Curator] = @original_Curator AND [Elder] = @original_Elder" InsertCommand="INSERT INTO [Groups] ([Title], [Course], [Specialty], [Curator], [Elder]) VALUES (@Title, @Course, @Specialty, @Curator, @Elder)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Groups] SET [Course] = @Course, [Specialty] = @Specialty, [Curator] = @Curator, [Elder] = @Elder WHERE [Title] = @original_Title AND [Course] = @original_Course AND [Specialty] = @original_Specialty AND [Curator] = @original_Curator AND [Elder] = @original_Elder">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionStringOO %>" SelectCommand="SELECT * FROM [Groups] WHERE ([Title] LIKE '%' + @Title + '%')" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Groups] WHERE [Title] = @original_Title AND [Course] = @original_Course AND [Specialty] = @original_Specialty AND [Curator] = @original_Curator AND [Elder] = @original_Elder" InsertCommand="INSERT INTO [Groups] ([Title], [Course], [Specialty], [Curator], [Elder]) VALUES (@Title, @Course, @Specialty, @Curator, @Elder)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Groups] SET [Course] = @Course, [Specialty] = @Specialty, [Curator] = @Curator, [Elder] = @Elder WHERE [Title] = @original_Title AND [Course] = @original_Course AND [Specialty] = @original_Specialty AND [Curator] = @original_Curator AND [Elder] = @original_Elder">
                     <DeleteParameters>
                         <asp:Parameter Name="original_Title" Type="String" />
                         <asp:Parameter Name="original_Course" Type="Int32" />
@@ -104,9 +106,7 @@
                         <asp:Parameter Name="Elder" Type="String" />
                     </InsertParameters>
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="TextBox1" Name="Course" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="TextBox1" Name="Curator" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="TextBox1" Name="Title" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="TextBox1" Name="Title" PropertyName="Text" Type="String" />
                     </SelectParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="Course" Type="Int32" />

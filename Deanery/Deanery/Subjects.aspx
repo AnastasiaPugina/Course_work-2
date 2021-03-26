@@ -64,8 +64,10 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
           </div>
-         <div style="height: 430px">
-            <div style="height: 258px">
+         
+            <div style="height: 268px; margin-top: 154px;">
+                <asp:Label ID="Label1" runat="server" Text="Введите название предмета:"></asp:Label>
+&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="TextBox1" runat="server" Height="17px" style="margin-top: 14px" Width="119px"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="Поиск" style="margin-left: 7px" Width="69px" />
                 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Id_sub" DataSourceID="SqlDataSource2" Height="100%" style="margin-top: 16px" Width="70%">
@@ -75,14 +77,30 @@
                         <asp:BoundField DataField="Professor" HeaderText="Professor" SortExpression="Professor" />
                     </Columns>
                 </asp:GridView>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionString1 %>" SelectCommand="SELECT * FROM [Subjects] WHERE (([Professor] LIKE '%' + @Professor + '%') OR ([Title_sub] LIKE '%' + @Title_sub + '%'))">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionStringOO %>" SelectCommand="SELECT * FROM [Subjects] WHERE ([Title_sub] LIKE '%' + @Title_sub + '%')" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Subjects] WHERE [Id_sub] = @original_Id_sub AND [Title_sub] = @original_Title_sub AND [Professor] = @original_Professor" InsertCommand="INSERT INTO [Subjects] ([Title_sub], [Id_sub], [Professor]) VALUES (@Title_sub, @Id_sub, @Professor)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Subjects] SET [Title_sub] = @Title_sub, [Professor] = @Professor WHERE [Id_sub] = @original_Id_sub AND [Title_sub] = @original_Title_sub AND [Professor] = @original_Professor">
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_Id_sub" Type="Int32" />
+                        <asp:Parameter Name="original_Title_sub" Type="String" />
+                        <asp:Parameter Name="original_Professor" Type="String" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="Title_sub" Type="String" />
+                        <asp:Parameter Name="Id_sub" Type="Int32" />
+                        <asp:Parameter Name="Professor" Type="String" />
+                    </InsertParameters>
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="TextBox1" Name="Professor" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="TextBox1" Name="Title_sub" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="TextBox1" Name="Title_sub" PropertyName="Text" Type="String" />
                     </SelectParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="Title_sub" Type="String" />
+                        <asp:Parameter Name="Professor" Type="String" />
+                        <asp:Parameter Name="original_Id_sub" Type="Int32" />
+                        <asp:Parameter Name="original_Title_sub" Type="String" />
+                        <asp:Parameter Name="original_Professor" Type="String" />
+                    </UpdateParameters>
                 </asp:SqlDataSource>
             </div>
-        </div>
+        
     </form>
 </body>
 </html>

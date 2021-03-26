@@ -32,9 +32,8 @@
         </div>
         
             <div style="height: 381px; margin-bottom: 0px;">
-            <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="Id_stud" AllowSorting="True" AllowPaging="True" CellPadding="5" HorizontalAlign="Left" Width="70%">
+            <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource3" AutoGenerateColumns="False" DataKeyNames="Id_stud" AllowSorting="True" AllowPaging="True" CellPadding="5" HorizontalAlign="Left" Width="70%">
                 <Columns>
-                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                     <asp:BoundField DataField="Id_stud" HeaderText="Id_stud" ReadOnly="True" SortExpression="Id_stud" />
                     <asp:BoundField DataField="FIO" HeaderText="FIO" SortExpression="FIO" />
                     <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
@@ -44,7 +43,38 @@
                 </Columns>
                 <RowStyle HorizontalAlign="Center" />
             </asp:GridView>
-            <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" CellPadding="5" DataKeyNames="Id_stud" DataSourceID="SqlDataSource1" DefaultMode="Insert" Height="302px" Width="25%" OnPageIndexChanging="DetailsView1_PageIndexChanging" HorizontalAlign="Right">
+                <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionString2 %>" DeleteCommand="DELETE FROM [Students] WHERE [Id_stud] = @original_Id_stud AND [FIO] = @original_FIO AND [Title] = @original_Title AND [Addres] = @original_Addres AND [Tel] = @original_Tel AND [Date_birth] = @original_Date_birth" InsertCommand="INSERT INTO [Students] ([Id_stud], [FIO], [Title], [Addres], [Tel], [Date_birth]) VALUES (@Id_stud, @FIO, @Title, @Addres, @Tel, @Date_birth)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Students]" UpdateCommand="UPDATE [Students] SET [FIO] = @FIO, [Title] = @Title, [Addres] = @Addres, [Tel] = @Tel, [Date_birth] = @Date_birth WHERE [Id_stud] = @original_Id_stud AND [FIO] = @original_FIO AND [Title] = @original_Title AND [Addres] = @original_Addres AND [Tel] = @original_Tel AND [Date_birth] = @original_Date_birth">
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_Id_stud" Type="Int32" />
+                        <asp:Parameter Name="original_FIO" Type="String" />
+                        <asp:Parameter Name="original_Title" Type="String" />
+                        <asp:Parameter Name="original_Addres" Type="String" />
+                        <asp:Parameter Name="original_Tel" Type="Int64" />
+                        <asp:Parameter Name="original_Date_birth" Type="DateTime" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="Id_stud" Type="Int32" />
+                        <asp:Parameter Name="FIO" Type="String" />
+                        <asp:Parameter Name="Title" Type="String" />
+                        <asp:Parameter Name="Addres" Type="String" />
+                        <asp:Parameter Name="Tel" Type="Int64" />
+                        <asp:Parameter Name="Date_birth" Type="DateTime" />
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="FIO" Type="String" />
+                        <asp:Parameter Name="Title" Type="String" />
+                        <asp:Parameter Name="Addres" Type="String" />
+                        <asp:Parameter Name="Tel" Type="Int64" />
+                        <asp:Parameter Name="Date_birth" Type="DateTime" />
+                        <asp:Parameter Name="original_Id_stud" Type="Int32" />
+                        <asp:Parameter Name="original_FIO" Type="String" />
+                        <asp:Parameter Name="original_Title" Type="String" />
+                        <asp:Parameter Name="original_Addres" Type="String" />
+                        <asp:Parameter Name="original_Tel" Type="Int64" />
+                        <asp:Parameter Name="original_Date_birth" Type="DateTime" />
+                    </UpdateParameters>
+                </asp:SqlDataSource>
+            <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" CellPadding="5" DataKeyNames="Id_stud" DataSourceID="SqlDataSource1" DefaultMode="Insert" Height="302px" Width="25%" OnPageIndexChanging="DetailsView1_PageIndexChanging" HorizontalAlign="Right" style="margin-top: 0px">
                 <Fields>
                     <asp:BoundField DataField="Id_stud" HeaderText="Id_stud" ReadOnly="True" SortExpression="Id_stud" />
                     <asp:BoundField DataField="FIO" HeaderText="FIO" SortExpression="FIO" />

@@ -82,11 +82,10 @@
                     <asp:BoundField DataField="Addres" HeaderText="Addres" SortExpression="Addres" />
                     <asp:BoundField DataField="Tel" HeaderText="Tel" SortExpression="Tel" />
                     <asp:BoundField DataField="Date_birth" HeaderText="Date_birth" SortExpression="Date_birth" />
-                    <asp:CommandField ShowInsertButton="True" />
                 </Fields>
                 <RowStyle HorizontalAlign="Center" />
             </asp:DetailsView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionString2 %>" SelectCommand="SELECT * FROM [Students]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Students] WHERE [Id_stud] = @original_Id_stud AND [FIO] = @original_FIO AND [Title] = @original_Title AND [Addres] = @original_Addres AND [Tel] = @original_Tel AND [Date_birth] = @original_Date_birth" InsertCommand="INSERT INTO [Students] ([Id_stud], [FIO], [Title], [Addres], [Tel], [Date_birth]) VALUES (@Id_stud, @FIO, @Title, @Addres, @Tel, @Date_birth)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Students] SET [FIO] = @FIO, [Title] = @Title, [Addres] = @Addres, [Tel] = @Tel, [Date_birth] = @Date_birth WHERE [Id_stud] = @original_Id_stud AND [FIO] = @original_FIO AND [Title] = @original_Title AND [Addres] = @original_Addres AND [Tel] = @original_Tel AND [Date_birth] = @original_Date_birth">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_DeaneryConnectionString2 %>" SelectCommand="SELECT * FROM [Students] WHERE ([FIO] LIKE '%' + @FIO + '%')" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [Students] WHERE [Id_stud] = @original_Id_stud AND [FIO] = @original_FIO AND [Title] = @original_Title AND [Addres] = @original_Addres AND [Tel] = @original_Tel AND [Date_birth] = @original_Date_birth" InsertCommand="INSERT INTO [Students] ([Id_stud], [FIO], [Title], [Addres], [Tel], [Date_birth]) VALUES (@Id_stud, @FIO, @Title, @Addres, @Tel, @Date_birth)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Students] SET [FIO] = @FIO, [Title] = @Title, [Addres] = @Addres, [Tel] = @Tel, [Date_birth] = @Date_birth WHERE [Id_stud] = @original_Id_stud AND [FIO] = @original_FIO AND [Title] = @original_Title AND [Addres] = @original_Addres AND [Tel] = @original_Tel AND [Date_birth] = @original_Date_birth">
                 <DeleteParameters>
                     <asp:Parameter Name="original_Id_stud" Type="Int32" />
                     <asp:Parameter Name="original_FIO" Type="String" />
@@ -103,6 +102,9 @@
                     <asp:Parameter Name="Tel" Type="Int64" />
                     <asp:Parameter Name="Date_birth" Type="DateTime" />
                 </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TextBox1" Name="FIO" PropertyName="Text" />
+                </SelectParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="FIO" Type="String" />
                     <asp:Parameter Name="Title" Type="String" />
@@ -124,7 +126,7 @@
                 <asp:TextBox ID="TextBox1" runat="server" Width="138px" style="margin-top: 15px" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="Поиск" Width="64px" style="margin-left: 9px" OnClick="Button1_Click1" />
                 <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" style="margin-left: 176px" Text="Вывод информации в Excel" Width="215px" />
-                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CellPadding="5" DataKeyNames="Id_stud" DataSourceID="SqlDataSource2" Width="70%" style="margin-top: 15px">
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CellPadding="5" DataKeyNames="Id_stud" DataSourceID="SqlDataSource1" Width="70%" style="margin-top: 15px">
                     <Columns>
                         <asp:BoundField DataField="Id_stud" HeaderText="Id_stud" ReadOnly="True" SortExpression="Id_stud" />
                         <asp:BoundField DataField="FIO" HeaderText="FIO" SortExpression="FIO" />

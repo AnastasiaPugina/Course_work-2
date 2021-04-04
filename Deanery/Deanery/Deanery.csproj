@@ -61,6 +61,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Web.Extensions" />
@@ -276,7 +277,6 @@
     </Compile>
     <Compile Include="Students.aspx.cs">
       <DependentUpon>Students.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Students.aspx.designer.cs">
       <DependentUpon>Students.aspx</DependentUpon>
